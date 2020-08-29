@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class ReactiveTodoApplication
 
 fun main(args: Array<String>) {
-	runApplication<ReactiveTodoApplication>(*args)
+    runApplication<ReactiveTodoApplication>(*args)
 }
