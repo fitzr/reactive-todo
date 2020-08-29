@@ -1,6 +1,6 @@
 package com.example.reactivetodo.domain.model.todo
 
-import com.example.reactivetodo.domain.model.user.UserId
+import com.example.reactivetodo.domain.model.auth.UserId
 
 interface TodoRepository {
     suspend fun fetchAll(userId: UserId): List<Todo>

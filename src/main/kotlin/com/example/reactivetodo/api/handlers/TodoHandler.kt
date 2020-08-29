@@ -1,10 +1,10 @@
 package com.example.reactivetodo.api.handlers
 
 import com.example.reactivetodo.application.todo.TodoService
+import com.example.reactivetodo.domain.model.auth.User
 import com.example.reactivetodo.domain.model.todo.TodoContent
 import com.example.reactivetodo.domain.model.todo.TodoId
 import com.example.reactivetodo.domain.model.todo.TodoTitle
-import com.example.reactivetodo.domain.model.user.User
 import java.net.URI
 import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse
@@ -31,7 +31,7 @@ class TodoHandler(private val service: TodoService) {
 
     suspend fun update(request: ServerRequest): ServerResponse {
         val param = request.awaitBody<UpdateTodoParam>()
-        val todo = service.update(userOf(request), param.todoTitle, param.todoContent, param.done)
+        val todo = service.update(userOf(request), todoIdOf(request), param.todoTitle, param.todoContent, param.done)
         return ServerResponse.ok().bodyValueAndAwait(todo)
     }
 
@@ -41,7 +41,7 @@ class TodoHandler(private val service: TodoService) {
     }
 
     private fun userOf(request: ServerRequest): User =
-            request.attribute("USER").orElseThrow() as User
+            request.attribute("AUTHENTICATED_USER").orElseThrow() as User
 
     private fun todoIdOf(request: ServerRequest): TodoId =
             TodoId(request.pathVariable("id"))

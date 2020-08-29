@@ -8,10 +8,5 @@ data class TodoData(
     val content: String,
     val done: Boolean
 ) {
-    constructor(todo: Todo) : this(
-            todo.id.value,
-            todo.title.value,
-            todo.content.value,
-            todo.done
-    )
+    constructor(todo: Todo) : this(todo.id.value, todo.title.value, todo.content.value, todo.done)
 }
