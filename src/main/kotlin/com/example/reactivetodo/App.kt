@@ -4,8 +4,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class ReactiveTodoApplication
+class App
 
 fun main(args: Array<String>) {
-    runApplication<ReactiveTodoApplication>(*args)
+    runApplication<App>(*args) {
+        addInitializers(beans())
+    }
 }

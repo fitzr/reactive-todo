@@ -4,7 +4,6 @@ plugins {
     id("org.springframework.boot") version "2.3.3.RELEASE"
     id("io.spring.dependency-management") version "1.0.10.RELEASE"
     id("com.diffplug.gradle.spotless") version "4.5.1"
-    id("jacoco")
     kotlin("jvm") version "1.3.72"
     kotlin("plugin.spring") version "1.3.72"
 }
