@@ -8,4 +8,7 @@ data class Todo(
     val title: TodoTitle,
     val content: TodoContent,
     val done: Boolean
-)
+) {
+    constructor(id: Int, userId: String, title: String, content: String, done: Boolean) :
+            this(TodoId(id), UserId(userId), TodoTitle(title), TodoContent(content), done)
+}

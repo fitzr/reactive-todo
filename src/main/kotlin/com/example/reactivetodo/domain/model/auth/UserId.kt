@@ -1,3 +1,3 @@
 package com.example.reactivetodo.domain.model.auth
 
-class UserId(val value: Int)
+data class UserId(val value: String)

@@ -19,7 +19,7 @@ class TodoService(private val repo: TodoRepository) {
             TodoData(repo.insert(user.id, title, content))
 
     suspend fun update(user: User, id: TodoId, title: TodoTitle?, content: TodoContent?, done: Boolean?): TodoData =
-            repo.update(user.id, title, content, done)?.let { TodoData(it) }
+            repo.update(user.id, id, title, content, done)?.let { TodoData(it) }
                     ?: throw TodoNotFoundException("Todo with id(${id.value}) was not found.")
 
     suspend fun delete(user: User, id: TodoId) {

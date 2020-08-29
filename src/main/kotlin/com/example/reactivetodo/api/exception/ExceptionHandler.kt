@@ -1,4 +1,4 @@
-package com.example.reactivetodo.api
+package com.example.reactivetodo.api.exception
 
 import com.example.reactivetodo.application.TodoNotFoundException
 import com.example.reactivetodo.application.TodoUnauthorizedException
@@ -26,11 +26,15 @@ class ExceptionHandler(serverCodecConfigurer: ServerCodecConfigurer) : ErrorWebE
             is IllegalArgumentException -> HttpStatus.BAD_REQUEST
             is TodoNotFoundException -> HttpStatus.NOT_FOUND
             is TodoUnauthorizedException -> HttpStatus.UNAUTHORIZED
-            else -> {
+            else -> HttpStatus.INTERNAL_SERVER_ERROR
+        }.let {
+            if (it.is5xxServerError) {
                 logger.error("SERVER ERROR", ex)
-                HttpStatus.INTERNAL_SERVER_ERROR
+            } else {
+                logger.debug("CLIENT ERROR", ex)
             }
-        }.let { ServerResponse.status(it.value()).bodyValue(it.reasonPhrase) }
+            ServerResponse.status(it.value()).bodyValue(ErrorResponse(it.reasonPhrase))
+        }
 
     private class ResponseContext(val writers: MutableList<HttpMessageWriter<*>>) : ServerResponse.Context {
         override fun viewResolvers(): MutableList<ViewResolver> = Collections.emptyList()
