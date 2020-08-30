@@ -1,0 +1,10 @@
+todo:
+  auth:
+    baseUrl: "http://localhost:3000"
+    path: auth
+  db:
+    host: localhost
+    port: 5432
+    user: admin-user
+    pass: admin-pass
+    database: reactivetodo
