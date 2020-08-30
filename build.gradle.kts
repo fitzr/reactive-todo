@@ -14,6 +14,9 @@ java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
     mavenCentral()
+    maven {
+        url = uri("https://d1osg35nybn3tt.cloudfront.net")
+    }
 }
 
 dependencies {
@@ -29,6 +32,7 @@ dependencies {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }
     testImplementation("io.projectreactor:reactor-test")
+    implementation("com.amazonaws:codeguru-profiler-java-agent:1.0.1")
 }
 
 tasks.withType<Test> {
